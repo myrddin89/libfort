@@ -30,8 +30,8 @@ endif()
 include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
 
-# configure_file(libfort.pc.in libfort.pc @ONLY)
-# install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libfort.pc DESTINATION lib/pkgconfig)
+configure_file(libfort.pc.in libfort.pc @ONLY)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libfort.pc DESTINATION lib/pkgconfig)
 
 configure_package_config_file(
     fort-config.cmake.in
@@ -66,17 +66,6 @@ install(
     FILE fort-targets.cmake
     NAMESPACE fort::
     DESTINATION ${CMAKECONFIG_INSTALL_DIR}/fort
-)
-
-install(
-    DIRECTORY include/
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    FILES_MATCHING PATTERN "*.hpp"
-)
-
-install(
-    FILES include/${LIB_NAME}/${LIB_NAME}
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${LIB_NAME}
 )
 
 install(FILES fort.h fort.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/fort)
