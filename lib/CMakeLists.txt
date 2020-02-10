@@ -6,7 +6,8 @@ add_library(fort
 
 target_include_directories(fort
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+        $<INSTALL_INTERFACE:include>
 )
 
 set_target_properties(fort
