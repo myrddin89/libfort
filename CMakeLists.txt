@@ -39,6 +39,7 @@ message(STATUS "libfort build options: "
 # for fort.hpp
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # ------------------------------------------------------------------------------
 # Warnings
@@ -155,9 +156,9 @@ set(FORT_HAVE_UTF8 "${FORT_ENABLE_UTF8}" CACHE STRING "fort option")
 # ------------------------------------------------------------------------------
 
 add_subdirectory(lib)
-add_subdirectory(src)
-add_subdirectory(tests)
-add_subdirectory(examples)
+add_subdirectory(src EXCLUDE_FROM_ALL)
+add_subdirectory(tests EXCLUDE_FROM_ALL)
+add_subdirectory(examples EXCLUDE_FROM_ALL)
 
 
 # ------------------------------------------------------------------------------

@@ -27,11 +27,16 @@ if(NOT FORT_HAVE_UTF8)
     )
 endif()
 
+if (NOT DEFINED CMAKECONFIG_INSTALL_DIR)
+   set(CMAKECONFIG_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/
+       CACHE PATH "Installation directory for CMake files")
+endif()
+
 include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
 
-configure_file(libfort.pc.in libfort.pc @ONLY)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libfort.pc DESTINATION lib/pkgconfig)
+# configure_file(libfort.pc.in libfort.pc @ONLY)
+# install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libfort.pc DESTINATION lib/pkgconfig)
 
 configure_package_config_file(
     fort-config.cmake.in
