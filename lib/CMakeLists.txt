@@ -2,6 +2,7 @@ option(FORT_HAVE_WCHAR "Enable wchar support" ON)
 option(FORT_HAVE_UTF8 "Enable UTF8 support" ON)
 
 add_library(fort SHARED fort.c)
+add_library(fort::fort ALIAS fort)
 
 target_include_directories(fort
     PUBLIC
