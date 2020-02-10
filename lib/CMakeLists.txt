@@ -1,8 +1,7 @@
 option(FORT_HAVE_WCHAR "Enable wchar support" ON)
 option(FORT_HAVE_UTF8 "Enable UTF8 support" ON)
 
-add_library(fort
-    fort.c)
+add_library(fort SHARED fort.c)
 
 target_include_directories(fort
     PUBLIC
@@ -38,7 +37,7 @@ install(
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-install(FILES fort.h fort.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(FILES fort.h fort.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/fort)
 
-configure_file(libfort.pc.in libfort.pc @ONLY)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libfort.pc DESTINATION lib/pkgconfig)
+# configure_file(libfort.pc.in libfort.pc @ONLY)
+# install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libfort.pc DESTINATION lib/pkgconfig)
