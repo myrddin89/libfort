@@ -27,17 +27,56 @@ if(NOT FORT_HAVE_UTF8)
     )
 endif()
 
-
+include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
-install(
-    TARGETS
-      fort
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
-
-install(FILES fort.h fort.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/fort)
 
 # configure_file(libfort.pc.in libfort.pc @ONLY)
 # install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libfort.pc DESTINATION lib/pkgconfig)
+
+configure_package_config_file(
+    fort-config.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/fort-config.cmake
+    INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}/${LIB_NAME}
+    PATH_VARS CMAKE_INSTALL_INCLUDEDIR
+)
+
+write_basic_package_version_file(
+    ${CMAKE_CURRENT_BINARY_DIR}/fort-config-version.cmake
+    COMPATIBILITY SameMajorVersion
+)
+
+install(
+    FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/fort-config.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/fort-config-version.cmake
+    DESTINATION ${CMAKECONFIG_INSTALL_DIR}/fort
+)
+
+install(
+    TARGETS fort
+    EXPORT fort-targets
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+install(
+    EXPORT fort-targets
+    FILE fort-targets.cmake
+    NAMESPACE fort::
+    DESTINATION ${CMAKECONFIG_INSTALL_DIR}/fort
+)
+
+install(
+    DIRECTORY include/
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    FILES_MATCHING PATTERN "*.hpp"
+)
+
+install(
+    FILES include/${LIB_NAME}/${LIB_NAME}
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${LIB_NAME}
+)
+
+install(FILES fort.h fort.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/fort)
