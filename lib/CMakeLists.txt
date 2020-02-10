@@ -27,6 +27,11 @@ if(NOT FORT_HAVE_UTF8)
     )
 endif()
 
+if (NOT DEFINED CMAKECONFIG_INSTALL_DIR)
+   set(CMAKECONFIG_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/
+       CACHE PATH "Installation directory for CMake files")
+endif()
+
 include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
 
