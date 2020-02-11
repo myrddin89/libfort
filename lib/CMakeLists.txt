@@ -3,7 +3,6 @@ option(FORT_HAVE_UTF8 "Enable UTF8 support" ON)
 
 add_library(fort SHARED fort.c)
 add_library(fort::fort ALIAS fort)
-add_library(libfort ALIAS fort)
 
 target_include_directories(fort
     PUBLIC
@@ -41,7 +40,7 @@ set(CMAKECONFIG_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/
 configure_package_config_file(
     libfort-config.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/libfort-config.cmake
-    INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}/${LIB_NAME}
+    INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}/fort
     PATH_VARS CMAKE_INSTALL_INCLUDEDIR
 )
 
@@ -73,4 +72,4 @@ install(
     DESTINATION ${CMAKECONFIG_INSTALL_DIR}/libfort
 )
 
-install(FILES fort.h fort.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/fort)
+install(FILES fort.h fort.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
